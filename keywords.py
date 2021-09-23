@@ -2,7 +2,7 @@ import re
 
 
 def get_text():
-    file = open(r"C:\\Download\text.txt", "r", encoding="UTF-8")
+    file = open(r"C:\\Download\test.txt", "r", encoding="UTF-8")
     txt = file.read()
     for ch in '!#$%&()+,-.:;<=>?@[\\]^_{|}~':
         txt = txt.replace(ch, " ")
