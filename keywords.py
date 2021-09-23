@@ -1,7 +1,7 @@
 import re
 
 
-def get_text():
+def read_text():
     file = open(r"C:\\Download\test.txt", "r", encoding="UTF-8")
     txt = file.read()
     for ch in '!#$%&()+,-.:;<=>?@[\\]^_{|}~':
@@ -10,8 +10,8 @@ def get_text():
     return txt
 
 
-def words_filter():
-    txt = get_text().replace("else if", "elseif")
+def filter():
+    txt = read_text().replace("else if", "elseif")
     separator = [r'//.*', r'\/\*(?:[^\*]|\*+[^\/\*])*\*+\/', r'".*"']
     for sp in separator:
         wordlist = re.split(sp, txt)
@@ -22,11 +22,11 @@ def words_filter():
     return wordlist
 
 
-words = words_filter()
+words = filter()
 filterwords = []
 
 
-def first_level():
+def main_counter():
     keywords = {"auto", "break", "case", "char", "const",
                 "continue", "default", "do", "double", "else",
                 "enum", "extern", "float", "for", "goto",
@@ -48,7 +48,7 @@ def first_level():
     return counts
 
 
-def second_level(counts):
+def switchcase(counts):
     num = counts.get("switch", 0)
     print("switch num: {}".format(num))
     if num == 0:
@@ -68,7 +68,7 @@ def second_level(counts):
     print(" ".join(str(x) for x in count))
 
 
-def last_level():
+def ifelse():
     stack = []
     if_else_num = 0
     if_elseif_else_num = 0
@@ -93,13 +93,13 @@ def last_level():
 level = input()
 
 
-def main():
+def count():
     if '1' <= level <= '4':
-        counts = first_level()
+        counts = main_counter()
     if '2' <= level <= '4':
-        second_level(counts)
+        switchcase(counts)
     if '3' <= level <= '4':
-        last_level()
+        ifelse()
 
 
-main()
+count()
